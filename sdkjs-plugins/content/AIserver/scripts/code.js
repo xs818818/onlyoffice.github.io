@@ -387,7 +387,7 @@
             const jwt = window.Asc.JWT;
             console.log("SSE请求开始");
             const model = localStorage.getItem('model');
-            const url = `https://open.bigmodel.cn/api/paas/v4/chat/completions`;
+            const url = `https://open.bigmodel.cn/api/paas/v3/model-api/${model}/sse-invoke`;
 
             const headers = {
                 'Accept': 'text/event-stream',
@@ -396,9 +396,7 @@
             };
 
             const requestData = {
-                model: model,
-                stream: true,
-                messages: conversationHistory
+                prompt: conversationHistory
             };
 
             fetch(url, {
@@ -420,9 +418,9 @@
 
     function displaySSEMessage(reader, currentDiv, currentMessage) {
         reader.read().then(function processResult(result) {
-            // console.log("stream result: ", result, typeof result.value);
-            if (result.done) {
-                // console.log("sse message done!", result);
+            // console.log("stream result: ", result);
+            if (result.value.includes('event:end') || result.value.includes('event:error') || result.value.includes('event:interrupt') || result.value.includes('event:finish')) {
+                // console.log("result.value of stream", result.value);
                 conversationHistory.push({ role: 'assistant', content: currentMessage });
                 return;
             }
@@ -436,23 +434,11 @@
             }
             const lines = result.value.split('\n');
             lines.forEach(line => {
-                if (line.includes('data') && !line.includes('DONE')) {
-                    // console.log("line: ", line, typeof line);
-                    line = line.replace('data: ', '');
-                    const fragment = JSON.parse(line).choices[0].delta.content;
+                if (line.includes('data')) {
+                    const fragment = line.split(':')[1];
                     currentMessage += fragment;
-                    // if the fragment contain a newline character, create a new div element
-                    // but the char before or after the newline character should be handle appropriately
-                    if (fragment.includes('\n')) {
-                        const lines = fragment.split('\n');
-                        lines.forEach((line, index) => {
-                            if (index === 0) {
-                                currentDiv.appendChild(document.createTextNode(line));
-                            } else {
-                                currentDiv.appendChild(document.createElement('br'));
-                                currentDiv.appendChild(document.createTextNode(line));
-                            }
-                        });
+                    if (fragment === '') {
+                        currentDiv.appendChild(document.createElement('br'));
                     } else {
                         currentDiv.appendChild(document.createTextNode(fragment));
                     }

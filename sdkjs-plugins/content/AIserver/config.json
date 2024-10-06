@@ -1,27 +1,27 @@
 {
-    "name": "AIserver",
+    "name": "AIserver Copilot",
     "nameLocale": {
-        "zh": "AI服务",
-        "de": "AIserver",
-        "ru": "AIserver",
-        "fr": "AIserver",
-        "pt-BR": "AIserver",
-        "es": "AIserver"
+        "zh": "AIserver Copilot",
+        "de": "AIserver Copilot",
+        "ru": "AIserver Copilot",
+        "fr": "AIserver Copilot",
+        "pt-BR": "AIserver Copilot",
+        "es": "AIserver Copilot"
     },
     "guid": "asc.{4b5efd7f-7c8d-1ef4-feab-bfbf2e1d86ac}",
     "baseUrl": "",
-    "version": "1.0.2",
+    "version": "1.0.1",
     "offered": "Jianbo Lin",
     "variations": [
         {
-            "description": "A copilot plugin for OnlyOffice Document based on AI model.",
+            "description": "A copilot plugin for OnlyOffice Document based on AIserver model.",
             "descriptionLocale": {
-                "zh": "基于AI的插件",
-                "de": "基于AI的插件",
-                "ru": "基于AI的插件",
-                "fr": "基于AI的插件",
-                "pt-BR": "基于AI的插件",
-                "es": "基于AI的插件"
+                "zh": "基于AIserver 大模型的 OnlyOffice 文档 Copilot 插件",
+                "de": "Ein Copilot-Plugin für OnlyOffice-Dokumente basierend auf dem AIserver Modell.",
+                "ru": "Плагин Copilot для документов OnlyOffice на основе модели AIserver.",
+                "fr": "Un plugin copilote pour les documents OnlyOffice basé sur le modèle AIserver.",
+                "pt-BR": "Um plugin copiloto para OnlyOffice Document baseado no modelo AIserver.",
+                "es": "Un complemento de copiloto para documentos de OnlyOffice basado en el modelo AIserver."
             },
             "url": "index.html",
             "icons": [
